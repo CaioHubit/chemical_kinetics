@@ -1,3 +1,4 @@
+from xml.etree.ElementTree import QName
 import pygame
 import random as rd
 import math
@@ -7,13 +8,14 @@ import constantes as con
 # Classe para representar as partículas
 
 class Particula:
-    def __init__(self, x, y, massa, velocidade_x, velocidade_y, cor):
+    def __init__(self, x, y, massa, velocidade_x, velocidade_y, cor, elemento = str):
         # Propriedades da partícula
+        self.elemento = elemento
         self.x = x
         self.y = y
         self.massa = massa
         self.raio = massa
-        self.area_min = massa * 10
+    #    self.area_min = massa * 10
         self.cor = cor  
         self.momento_x = massa * velocidade_x
         self.momento_y = massa * velocidade_y
@@ -71,13 +73,14 @@ class Particula:
                 self.speed_y = p_2vel[1]
                 other.speed_x = p_1vel[0]
                 other.speed_y = p_1vel[1]
-    
+
     # Desenho da partícula
     def desenho(self):
         pygame.draw.circle(con.window, self.cor, (int(self.x), int(self.y)), self.raio)
 
 # Classe para transformar strings em variáveis com atributos
-class TransformaVariaveis:
+class TransformaVariaveis: 
     def __init__(self, nomes_variaveis):
         for nome in nomes_variaveis:
             setattr(self, nome, None)
+
